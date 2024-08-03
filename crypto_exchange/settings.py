@@ -29,13 +29,13 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 
 
-ALLOWED_HOSTS = ['https://web-production-dd91.up.railway.app/', 'web-production-dd91.up.railway.app',]
+ALLOWED_HOSTS = ['https://web-production-5f49.up.railway.app/', 'web-production-5f49.up.railway.app',]
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-dd91.up.railway.app/', 'web-production-dd91.up.railway.app',]
+CSRF_TRUSTED_ORIGINS = ['https://web-production-5f49.up.railway.app/', 'web-production-5f49.up.railway.app',]
 
 # Application definition
 

@@ -88,7 +88,7 @@ class BuyTransaction(models.Model):
         db_table = 'buy_transactions'
     
     def __str__(self):
-        return f"{self.id} - {self.tx_hash}"
+        return f"{self.id} - {self.guid}"
 
     def save(self, *args, **kwargs):
         if not self.id:

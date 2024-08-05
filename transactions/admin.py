@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import * 
 
 
-@admin.register(Transaction)
-class TransactionAdmin(admin.ModelAdmin):
+@admin.register(BuyTransaction)
+class BuyTransactionAdmin(admin.ModelAdmin):
     search_fields = ['tx_hash', 'sender', 'receiver']
 
 

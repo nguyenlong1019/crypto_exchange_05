@@ -36,89 +36,60 @@
 
     <div class="main-section container">
         <div class="wrapper">
-            <p class="title">Cổng giao dịch tiền mã hóa crypto</p>
-            <p class="sub-title">Không phí ẩn, không đăng ký tài khoản, không giới hạn.</p>
             <div class="form-section">
-                <div class="tab">
-                    <div class="tablinks">
-                        <button id="defaultOpen" onclick="openTab(event, 'buy-form');" class="tablink">
-                            Mua
-                        </button>
-                        <button class="tablink" onclick="openTab(event, 'sell-form');">
-                            Bán
-                        </button>
-                    </div>
-                </div>
-
                 <span class="d-none" id="btc-price">{{BTC.price}}</span>
                 <span class="d-none" id="eth-price">{{ETH.price}}</span>
                 <span class="d-none" id="usdt-price">{{USDT.price}}</span>
                 <span class="d-none" id="bnb-price">{{BNB.price}}</span>
 
-                <div class="tabcontent" id="buy-form">
-                    <form action="{% url 'create-buy' %}" method="GET">
+                <div class="tabcontent" style="display: block;" id="buy-form">
+                    <h1 style="font-size: 24px;text-align: center;margin-top: 16px;">Mua {{buyOption}}</h1>
+
+                    <p style="margin-top: 32px;text-align: center;"><strong style="display: inline-block;font-size: 15px;">Mua {{buyAmount}} {{buyOption}} với {{buyTransfer|intcomma}} VND</strong></p>
+
+
+                    <form id="buy-coin-form" action="{% url 'create-buy' %}" method="POST">
                         {% csrf_token %}
+
+                        <input type="hidden" name="buy-amount" value="{{buyAmount}}">
+                        <input type="hidden" name="buy-option" value="{{buyOption}}">
+                        <input type="hidden" name="buy-transfer" value="{{buyTransfer}}">
+                        <input type="hidden" name="buy-currency" value="{{buyCurrency}}">
+
                         <div class="form-control">
-                            <div class="form-label">Số lượng mua</div>
+                            <div class="form-label">Địa chỉ email</div>
                             <div class="flex-bw">
-                                <input type="number" name="buy-amount" min="0" step="0.00001" id="buy-amount" placeholder="0" required>
-                                <select name="buy-option" id="buy-option">
-                                    <option value="BTC" data-price="{{BTC.price}}" data-amount="{{BTC.price|intcomma}}">BTC</option>
-                                    <option value="ETH" data-price="{{ETH.price}}" data-amount="{{ETH.price|intcomma}}">ETH</option>
-                                    <option value="USDT" data-price="{{USDT.price}}" data-amount="{{USDT.price|intcomma}}">USDT</option>
-                                    <option value="BNB" data-price="{{BNB.price}}" data-amount="{{BNB.price|intcomma}}">BNB</option>
-                                </select>
+                                <input style="width: 100%;" type="text" name="email" id="email" placeholder="Địa chỉ email" required>
                             </div>
                         </div>
+                        <small style="display: inline-block;padding-left: 12px;font-size: 12px;margin-top: 4px;">Chúng tôi sử dụng email để gửi thông tin về giao dịch của bạn</small>
+
                         <div class="form-control">
-                            <div class="form-label">Bạn sẽ gửi</div>
+                            <div class="form-label">Địa chỉ ví nhận</div>
                             <div class="flex-bw">
-                                <input type="number" name="buy-transfer" id="buy-transfer" placeholder="0" readonly>
-                                <select name="buy-currency" id="buy-currency">
-                                    <option value="VND">VND</option>
-                                </select>
-                            </div>
-                            <div class="form-subinfo" id="buy-subinfo">
-                                Đơn giá {{BTC.price|intcomma}} VND/BTC
+                                <input style="width: 100%;" type="text" maxlength="42" name="wallet-address" id="wallet-address" placeholder="Địa chỉ ví nhận" required>
                             </div>
                         </div>
-                        <button class="form-submit" type="submit">Mua</button>
+                        <small style="display: inline-block;padding-left: 12px;font-size: 12px;margin-top: 4px;">Vui lòng cung cấp địa chỉ ví nhận crypto của bạn</small>
+
+                        <div class="form-control">
+                            <select style="width: 100%;" name="blockchain-net" id="" required>
+                                <option value="BEP20">BNB Smart Chain (BEP20)</option>
+                            </select>
+                        </div>
+
+                        <small style="display: inline-block;font-size: 12px;margin-top: 6px;">Phí gửi {{fee}} {{buyOption}}</small><br>
+                        <small style="display: inline-block;font-size: 12px;margin-top: 12px;">Bạn sẽ nhận: {{remain}} {{buyOption}}</small>
+                        
+                        <button class="form-submit" type="submit">Tiếp tục</button>
+                        <a href="/" class="btn-prev">Quay lại</a>
                     </form>
                 </div>
 
 
 
 
-                <div class="tabcontent" id="sell-form">
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <div class="form-control">
-                            <div class="form-label">Số lượng bán</div>
-                            <div class="flex-bw">
-                                <input type="number" name="" min="0" step="0.00001" id="sell-amount" placeholder="0">
-                                <select name="" id="sell-option">
-                                    <option value="BTC" data-price="{{BTC.price}}" data-amount="{{BTC.price|intcomma}}">BTC</option>
-                                    <option value="ETH" data-price="{{ETH.price}}" data-amount="{{ETH.price|intcomma}}">ETH</option>
-                                    <option value="USDT" data-price="{{USDT.price}}" data-amount="{{USDT.price|intcomma}}">USDT</option>
-                                    <option value="BNB" data-price="{{BNB.price}}" data-amount="{{BNB.price|intcomma}}">BNB</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-control">
-                            <div class="form-label">Bạn sẽ nhận</div>
-                            <div class="flex-bw">
-                                <input type="number" id="sell-transfer" placeholder="0" disabled>
-                                <select name="" id="">
-                                    <option value="">VND</option>
-                                </select>
-                            </div>
-                            <div class="form-subinfo" id="sell-subinfo">
-                                Đơn giá {{BTC.price|intcomma}} VND/BTC
-                            </div>
-                        </div>
-                        <button class="form-submit" type="submit">Mua</button>
-                    </form>
-                </div>
+                
             </div>
             <p class="h4">Bạn có câu hỏi?</p>
             <div class="questions-section">
@@ -173,7 +144,45 @@
         </div>
     </div>
 
-    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            // console.log("Oke!");
+            
+
+            $(".flip-icon").click(function(){
+                $(this).closest('.question').find('.question-desc').slideToggle("slow");
+            });
+
+
+            $(window).scroll(function() {
+                // Lấy vị trí cuộn của trang
+                var scrollTop = $(window).scrollTop();
+                // console.log("Vị trí cuộn hiện tại: " + scrollTop);
+
+                // Thực hiện hành động dựa trên vị trí cuộn
+                // Ví dụ: Thay đổi kiểu dáng của header khi cuộn
+                if (scrollTop > 100) {
+                    $('.header-section').addClass('scrolled');
+                } else {
+                    $('.header-section').removeClass('scrolled');
+                }
+            });
+
+        });
+
+        document.getElementById('buy-coin-form').addEventListener('submit', (event) => {
+            const walletAddress = document.getElementById('wallet-address').value;
+            if (walletAddress.length != 42) {
+                alert('Địa chỉ ví không hợp lệ!');
+                event.preventDefault();
+                return;
+            }
+        });
+
+        
+    </script>
+
+
     
 </body>
 </html>

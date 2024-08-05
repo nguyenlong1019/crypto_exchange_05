@@ -254,3 +254,25 @@ input:disabled {
 .d-none {
     display: none;
 }
+
+.btn-prev {
+    display: inline-block;
+    width: 100%;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.7;
+    color: rgb(7, 141, 238);
+    box-shadow: none;
+    height: 48px;
+    font-size: 15px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 11px;
+    margin: 0;
+    text-decoration: none;
+}
+
+.btn-prev:hover {
+    background-color: rgba(7, 141, 238, 0.08);
+}

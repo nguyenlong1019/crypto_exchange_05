@@ -44,11 +44,7 @@ class CryptoPrice(models.Model):
         return f"{self.coin.symbol if self.coin else self.id} - {self.price}"
     
 
-class Transaction(models.Model):
-    TRANSACTION_TYPE = (
-        ('buy', 'buy'),
-        ('sell', 'sell'),
-    )
+class BuyTransaction(models.Model):
     TRANSACTIOn_STATUS = (
         ('Pending', 'Pending'),
         ('Completed', 'Completed'),
@@ -66,7 +62,7 @@ class Transaction(models.Model):
     # status = models.CharField(max_length=20, default='Pending')
 
     guid = models.UUIDField(default=uuid.uuid4, null=True, blank=True)
-    transaction_type = models.CharField(max_length=15, default='buy', choices=TRANSACTION_TYPE)
+    transaction_type = models.CharField(max_length=15, default='buy')
     amount = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
     coin_name = models.CharField(max_length=7, null=True, blank=True)
     coin = models.ForeignKey(CryptoCoin, on_delete=models.SET_NULL, null=True, blank=True)
@@ -77,6 +73,9 @@ class Transaction(models.Model):
     wallet_address = models.CharField(max_length=42, null=True, blank=True)
     blockchain_net = models.CharField(max_length=255, default='BNB Smart Chain (BEP20)')
 
+    fee = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+    remain = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+
     status = models.CharField(max_length=20, default='Pending')
 
     created_at = models.DateTimeField(editable=False, null=True, blank=True)
@@ -86,7 +85,7 @@ class Transaction(models.Model):
         ordering = ('-created_at',)
         verbose_name = 'Giao dịch'
         verbose_name_plural = 'Giao dịch'
-        db_table = 'transactions'
+        db_table = 'buy_transactions'
     
     def __str__(self):
         return f"{self.id} - {self.tx_hash}"
@@ -94,4 +93,4 @@ class Transaction(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
-        super(Transaction, self).save(*args, **kwargs)
+        super(BuyTransaction, self).save(*args, **kwargs)

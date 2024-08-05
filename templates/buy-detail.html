@@ -36,90 +36,95 @@
 
     <div class="main-section container">
         <div class="wrapper">
-            <p class="title">Cổng giao dịch tiền mã hóa crypto</p>
-            <p class="sub-title">Không phí ẩn, không đăng ký tài khoản, không giới hạn.</p>
             <div class="form-section">
-                <div class="tab">
-                    <div class="tablinks">
-                        <button id="defaultOpen" onclick="openTab(event, 'buy-form');" class="tablink">
-                            Mua
-                        </button>
-                        <button class="tablink" onclick="openTab(event, 'sell-form');">
-                            Bán
-                        </button>
+
+                <div class="tabcontent" style="display: block;">
+                    <h1 style="font-size: 24px;text-align: center;margin-top: 16px;">Đang chờ bạn nạp VND</h1>
+
+                    <div style="display: flex;align-items: center;justify-content: center;">
+                        <button style="display: inline-block;margin: 32px auto;font-size: 13px;color: #fff;background-color: #FF2B18;outline: none;border: none;height: 32px;border-radius: 16px;padding: 4px;cursor: pointer;">Thời gian 00:00</button>
                     </div>
+
+                    <p style="margin-top: 32px;text-align: center;font-size: 15px;margin-bottom: 24px;">Vui lòng chuyển khoản vào tài khoản bên dưới</p>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Tên ngân hàng:</strong>
+                        <span style="display: inline-block;font-size: 15px;">Ngân hàng TMCP Phương Đông</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Số tài khoản:</strong>
+                        <span style="display: inline-block;font-size: 15px;">BTP0805001882991</span>
+                    </div>
+
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Tên chủ tài khoản:</strong>
+                        <span style="display: inline-block;font-size: 15px;">NHPSHOP</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Số tiền:</strong>
+                        <span style="display: inline-block;font-size: 15px;">{{buy_trans.price_transfer}}</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Ghi chú:</strong>
+                        <span style="display: inline-block;font-size: 15px;">IMME4LV2NI3ZUZ1NR470</span>
+                    </div>
+
+                    <p style="text-align: center;margin-bottom: 16px;margin-top: 60px;"><strong style="display: inline-block;font-size: 14px;">Đang đợi xác nhận thanh toán VND</strong></p>
+                    <p style="text-align: center;font-size: 15px;">Hệ thống sẽ tự động chuyển BTC tới ví của bạn sau khi nhận được VND</p>
+                    
                 </div>
 
-                <span class="d-none" id="btc-price">{{BTC.price}}</span>
-                <span class="d-none" id="eth-price">{{ETH.price}}</span>
-                <span class="d-none" id="usdt-price">{{USDT.price}}</span>
-                <span class="d-none" id="bnb-price">{{BNB.price}}</span>
-
-                <div class="tabcontent" id="buy-form">
-                    <form action="{% url 'create-buy' %}" method="GET">
-                        {% csrf_token %}
-                        <div class="form-control">
-                            <div class="form-label">Số lượng mua</div>
-                            <div class="flex-bw">
-                                <input type="number" name="buy-amount" min="0" step="0.00001" id="buy-amount" placeholder="0" required>
-                                <select name="buy-option" id="buy-option">
-                                    <option value="BTC" data-price="{{BTC.price}}" data-amount="{{BTC.price|intcomma}}">BTC</option>
-                                    <option value="ETH" data-price="{{ETH.price}}" data-amount="{{ETH.price|intcomma}}">ETH</option>
-                                    <option value="USDT" data-price="{{USDT.price}}" data-amount="{{USDT.price|intcomma}}">USDT</option>
-                                    <option value="BNB" data-price="{{BNB.price}}" data-amount="{{BNB.price|intcomma}}">BNB</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-control">
-                            <div class="form-label">Bạn sẽ gửi</div>
-                            <div class="flex-bw">
-                                <input type="number" name="buy-transfer" id="buy-transfer" placeholder="0" readonly>
-                                <select name="buy-currency" id="buy-currency">
-                                    <option value="VND">VND</option>
-                                </select>
-                            </div>
-                            <div class="form-subinfo" id="buy-subinfo">
-                                Đơn giá {{BTC.price|intcomma}} VND/BTC
-                            </div>
-                        </div>
-                        <button class="form-submit" type="submit">Mua</button>
-                    </form>
-                </div>
+                
 
 
+                
+            </div>
+
+            <div class="form-section" style="margin-top: 24px;">
+                <div class="tabcontent" style="display: block;">
+                    <h1 style="font-size: 24px;text-align: center;margin-top: 16px;">Chi tiết giao dịch</h1>
+
+                    
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Mã giao dịch:</strong>
+                        <span style="display: inline-block;font-size: 15px;">O72521141444</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Số lượng:</strong>
+                        <span style="display: inline-block;font-size: 15px;">{{buy_trans.amount}} {{buy_trans.coin_name}}</span>
+                    </div>
 
 
-                <div class="tabcontent" id="sell-form">
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <div class="form-control">
-                            <div class="form-label">Số lượng bán</div>
-                            <div class="flex-bw">
-                                <input type="number" name="" min="0" step="0.00001" id="sell-amount" placeholder="0">
-                                <select name="" id="sell-option">
-                                    <option value="BTC" data-price="{{BTC.price}}" data-amount="{{BTC.price|intcomma}}">BTC</option>
-                                    <option value="ETH" data-price="{{ETH.price}}" data-amount="{{ETH.price|intcomma}}">ETH</option>
-                                    <option value="USDT" data-price="{{USDT.price}}" data-amount="{{USDT.price|intcomma}}">USDT</option>
-                                    <option value="BNB" data-price="{{BNB.price}}" data-amount="{{BNB.price|intcomma}}">BNB</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-control">
-                            <div class="form-label">Bạn sẽ nhận</div>
-                            <div class="flex-bw">
-                                <input type="number" id="sell-transfer" placeholder="0" disabled>
-                                <select name="" id="">
-                                    <option value="">VND</option>
-                                </select>
-                            </div>
-                            <div class="form-subinfo" id="sell-subinfo">
-                                Đơn giá {{BTC.price|intcomma}} VND/BTC
-                            </div>
-                        </div>
-                        <button class="form-submit" type="submit">Mua</button>
-                    </form>
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Đơn giá:</strong>
+                        <span style="display: inline-block;font-size: 15px;">{{buy_trans.price_transfer|intcomma}} {{buy_trans.currency}}/{{buy_trans.coin_name}}</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">                        <strong style="display: inline-block;font-size: 15px;">Địa chỉ ví nhận:</strong>
+                    </strong>
+                        <span style="display: inline-block;font-size: 15px;">{{buy_trans.wallet_address}}</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Mạng lưới:</strong>
+                        <span style="display: inline-block;font-size: 15px;">BSC</span>
+                    </div>
+
+                    <div class="item" style="display: flex;align-items: center;justify-content: space-between;border-bottom: 1px solid #ddd;padding: 16px 8px;">
+                        <strong style="display: inline-block;font-size: 15px;">Bạn sẽ nhận:</strong>
+                        <span style="display: inline-block;font-size: 15px;">{{buy_trans.remain}} {{buy_trans.coin_name}}</span>
+                    </div>
+                    
                 </div>
             </div>
+
             <p class="h4">Bạn có câu hỏi?</p>
             <div class="questions-section">
                 <div class="question">
@@ -173,7 +178,35 @@
         </div>
     </div>
 
-    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            // console.log("Oke!");
+            
+
+            $(".flip-icon").click(function(){
+                $(this).closest('.question').find('.question-desc').slideToggle("slow");
+            });
+
+
+            $(window).scroll(function() {
+                // Lấy vị trí cuộn của trang
+                var scrollTop = $(window).scrollTop();
+                // console.log("Vị trí cuộn hiện tại: " + scrollTop);
+
+                // Thực hiện hành động dựa trên vị trí cuộn
+                // Ví dụ: Thay đổi kiểu dáng của header khi cuộn
+                if (scrollTop > 100) {
+                    $('.header-section').addClass('scrolled');
+                } else {
+                    $('.header-section').removeClass('scrolled');
+                }
+            });
+
+        });
+        
+    </script>
+
+
     
 </body>
 </html>
